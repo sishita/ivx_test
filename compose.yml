@@ -1,0 +1,7 @@
+services:
+    build:
+      context: api_mock
+      target: builder
+    stop_signal: SIGINT
+    ports:
+      - "8000:8000"

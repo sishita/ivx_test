@@ -1,7 +1,35 @@
 services:
+  db:
+    image: mysql:8.0
+    volumes:
+      - db_data:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: ivxtest
+    ports:
+      - "3306:3306"
+
+  app:
+    build:
+      context: ./ivxtest
+      target: builder
+    volumes:
+      - ./ivxtest/:/app
+    ports:
+      - "8000:8000"
+    environment:
+      DB_HOST: db
+      API_URL: 'http://api_mock:8000'
+    depends_on:
+      - db
+
+  api_mock:
     build:
       context: api_mock
       target: builder
     stop_signal: SIGINT
     ports:
-      - "8000:8000"
+      - "8001:8000"
+
+volumes:
+  db_data:

@@ -20,6 +20,7 @@ services:
     environment:
       DB_HOST: db
       API_URL: 'http://api_mock:8000'
+      API_TIMEOUT: '10'
     depends_on:
       - db
 

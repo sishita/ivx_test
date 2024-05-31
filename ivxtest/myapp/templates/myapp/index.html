@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>AI Analysis</title>
+</head>
+<body>
+<h1>AI Analysis</h1>
+<form action="/analysis" method="POST">
+    {% csrf_token %}
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+        <li
+        {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    image_path <input type="text" required name="image_path"/>
+    <input type="submit" value="Submit">
+</form>
+</body>
+</html>
